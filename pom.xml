@@ -20,6 +20,8 @@
 
     <properties>
         <dep.aurelius.version>0.5.4</dep.aurelius.version>
+        <mavenVersion>3.3.3</mavenVersion>
+        <javaVersion>1.8</javaVersion>
     </properties>
 
     <dependencies>
@@ -117,8 +119,31 @@
                 <configuration>
 		                <skipLocalStaging>true</skipLocalStaging>
                     <serverId>atk</serverId>
-                    <nexusUrl>maven.trustedanalytics.org</nexusUrl>
+                    <nexusUrl>https://maven.trustedanalytics.org</nexusUrl>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${mavenVersion}</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>${javaVersion}</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -126,11 +151,11 @@
       <distributionManagement>
         <repository>
             <id>atk</id>
-            <url>http://maven.trustedanalytics.org/content/repositories/releases/</url>
+            <url>https://maven.trustedanalytics.org/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>atk-snapshots</id>
-            <url>http://maven.trustedanalytics.org/content/repositories/snapshots/</url>
+            <url>https://maven.trustedanalytics.org/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
